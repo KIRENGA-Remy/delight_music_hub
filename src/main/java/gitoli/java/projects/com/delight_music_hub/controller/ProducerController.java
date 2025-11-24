@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +24,13 @@ public class ProducerController {
     @Operation(summary = "Get available producers")
     public ResponseEntity<List<Producer>> getAllProducers(){
         return ResponseEntity.ok(producerRepository.findAll());
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get producer by ID")
+    public ResponseEntity<Producer> getProducerById(@PathVariable String id){
+        return producerRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

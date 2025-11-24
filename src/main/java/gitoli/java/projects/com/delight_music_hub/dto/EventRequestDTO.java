@@ -8,7 +8,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class EventRequest {
+public class EventRequestDTO {
     @NotBlank
     private String artistId;
 
